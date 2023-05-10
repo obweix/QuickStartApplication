@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Quick Start Application</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="home">Home</string>
+    <string name="knowledge">Knowledge</string>
+    <string name="navigate">Navigate</string>
+    <string name="mine">Mine</string>
+    <string name="search">Search</string>
+    <string name="project">Project</string>
+</resources>
