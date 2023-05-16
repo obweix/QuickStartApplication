@@ -12,21 +12,23 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.quickstartapplication.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.quickstartapplication.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
-
-    <fragment
         android:id="@+id/navigation_knowledge"
         android:name="com.example.quickstartapplication.ui.knowledge.KnowledgeFragment"
         android:label="@string/knowledge"
         tools:layout="@layout/fragment_knowledge"
         />
+
+
+    <fragment
+        android:id="@+id/navigation_project"
+        android:name="com.example.quickstartapplication.ui.project.ProjectFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_project" />
+
+    <fragment
+        android:id="@+id/navigation_mine"
+        android:name="com.example.quickstartapplication.ui.mine.MineFragment"
+        android:label="@string/mine"
+        tools:layout="@layout/fragment_mine" />
+
 </navigation>

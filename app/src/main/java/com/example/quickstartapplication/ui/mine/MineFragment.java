@@ -1,4 +1,4 @@
-package com.example.quickstartapplication.ui.dashboard;
+package com.example.quickstartapplication.ui.mine;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,23 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.quickstartapplication.databinding.FragmentDashboardBinding;
+import com.example.quickstartapplication.databinding.FragmentMineBinding;
 
-public class DashboardFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
+public class MineFragment extends Fragment {
+
+    private FragmentMineBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        MineViewModel mineViewModel =
+                new ViewModelProvider(this).get(MineViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentMineBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        mineViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

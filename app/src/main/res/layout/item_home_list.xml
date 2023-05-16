@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+       <variable
+           name="data"
+           type="com.example.quickstartapplication.network.bean.Datas" />
+        <variable
+            name="callback"
+            type="com.example.quickstartapplication.ui.home.DatasAdapter.OnItemClickListener" />
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ll_container"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:onClick="@{()-> callback.onItemClick(data)}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{data.title}" />
+
+            <TextView
+                android:background="@color/green_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{data.author}" />
+        </LinearLayout>
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:scaleType="center"
+            android:src="@drawable/ic_bookmark_48px" />
+
+    </LinearLayout>
+
+</layout>

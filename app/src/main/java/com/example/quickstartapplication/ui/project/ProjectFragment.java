@@ -1,4 +1,4 @@
-package com.example.quickstartapplication.ui.notifications;
+package com.example.quickstartapplication.ui.project;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.quickstartapplication.databinding.FragmentNotificationsBinding;
+import com.example.quickstartapplication.databinding.FragmentProjectBinding;
 
-public class NotificationsFragment extends Fragment {
+public class ProjectFragment extends Fragment {
 
-    private FragmentNotificationsBinding binding;
+    private FragmentProjectBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        NotificationsViewModel notificationsViewModel =
-                new ViewModelProvider(this).get(NotificationsViewModel.class);
+        ProjectViewModel projectViewModel =
+                new ViewModelProvider(this).get(ProjectViewModel.class);
 
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
+        binding = FragmentProjectBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textNotifications;
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        projectViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
