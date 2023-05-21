@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.paging.PagingDataAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,11 +20,18 @@ import com.example.quickstartapplication.base.BaseRecyclerViewAdapter;
 import com.example.quickstartapplication.databinding.ItemHomeListBinding;
 import com.example.quickstartapplication.network.bean.Data;
 import com.example.quickstartapplication.network.bean.Datas;
+import com.example.quickstartapplication.utils.Utils;
 
 import java.util.Random;
 
-public class DatasAdapter extends ListAdapter<Datas, DatasAdapter.DatasViewHolder> {
+public class DatasAdapter extends PagingDataAdapter<Datas, DatasAdapter.DatasViewHolder> {
     private static final String TAG = DatasAdapter.class.getSimpleName();
+
+    // Define Loading ViewType
+    public static final int LOADING_ITEM = 0;
+    // Define Movie ViewType
+    public static final int DATAS_ITEM = 1;
+
     private OnItemClickListener mClickListener;
     private OnItemLongClickListener mLongClickListener;
 
@@ -62,7 +70,7 @@ public class DatasAdapter extends ListAdapter<Datas, DatasAdapter.DatasViewHolde
     public void onBindViewHolder(@NonNull DatasViewHolder holder, int position) {
         holder.binding.setData(getItem(position));
         holder.binding.executePendingBindings();
-        holder.binding.llContainer.setBackgroundColor(getRandomColor());
+//        holder.binding.llContainer.setBackgroundColor(Utils.getRandomColor());
     }
 
     static class DatasViewHolder extends RecyclerView.ViewHolder{
@@ -73,10 +81,16 @@ public class DatasAdapter extends ListAdapter<Datas, DatasAdapter.DatasViewHolde
             this.binding = binding;
             if(null != binding.getData()){
                 String title = binding.getData().getTitle();
-                Log.d(TAG, "DatasViewHolder: title = " + title);
             }
         }
     }
+
+    @Override
+    public int getItemViewType(int position) {
+        // set ViewType
+        return position == getItemCount() ? DATAS_ITEM : LOADING_ITEM;
+    }
+
 
     public interface OnItemClickListener {
         void onItemClick(Datas item);
@@ -86,8 +100,4 @@ public class DatasAdapter extends ListAdapter<Datas, DatasAdapter.DatasViewHolde
         void onItemLongClick(View itemView, int pos);
     }
 
-    public int getRandomColor() {
-        Random rnd = new Random();
-        return Color.argb(200, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-    }
 }
