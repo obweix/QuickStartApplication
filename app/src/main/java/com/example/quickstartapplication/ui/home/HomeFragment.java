@@ -12,10 +12,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.paging.LoadState;
 import androidx.paging.PagingData;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.quickstartapplication.R;
 import com.example.quickstartapplication.databinding.FragmentHomeBinding;
 import com.example.quickstartapplication.model.HomeModel;
 import com.example.quickstartapplication.network.bean.Datas;
@@ -28,8 +33,10 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Consumer;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = HomeFragment.class.getSimpleName();
+    public static final String LINK_KEY = "link_key";
+    public static final String TITLE_KEY = "title_key";
 
     private FragmentHomeBinding mBinding;
 
@@ -45,22 +52,23 @@ public class HomeFragment extends Fragment {
         mBinding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = mBinding.getRoot();
 
-        final TextView textView = mBinding.textHome;
+        final TextView textView = mBinding.tvHome;
         homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
 
         mDatasAdapter = new DatasAdapter((data)->{
-            Log.d(TAG, "onCreateView: item click,datas = " + data.toString());
+            Bundle bundle = new Bundle();
+            bundle.putString(LINK_KEY, data.getLink());
+            bundle.putString(TITLE_KEY,data.getTitle());
+            Navigation.findNavController(getView()).navigate(R.id.navgation_home_details,bundle);
+
         });
 
         mDatasAdapter.addLoadStateListener(loadStates -> {
-            Log.d(TAG, "onCreateView: " +loadStates.toString());
           if(loadStates.getRefresh() instanceof LoadState.Loading){
-              Log.d(TAG, "onCreateView: 1");
              mBinding.tvState.setVisibility(View.VISIBLE);
              mBinding.tvState.setText("loading");
           }else if(loadStates.getRefresh() instanceof  LoadState.Error){
-              Log.d(TAG, "onCreateView: 2");
              mBinding.tvState.setVisibility(View.VISIBLE);
              mBinding.tvState.setText("network error");
           }else {
@@ -73,6 +81,10 @@ public class HomeFragment extends Fragment {
                 .withLoadStateFooter(new DatasLoadStateAdapter(view -> mDatasAdapter.retry())));
 
         subscribeToMode(homeViewModel);
+
+        mBinding.swipeRefreshHome.setOnRefreshListener(this);
+
+        mBinding.tvHome.setOnClickListener((view -> {mBinding.rvHome.scrollToPosition(0);}));
 
         return root;
     }
@@ -100,5 +112,11 @@ public class HomeFragment extends Fragment {
         mBinding = null;
         mDisposable.clear();
         super.onDestroyView();
+    }
+
+    @Override
+    public void onRefresh() {
+        mDatasAdapter.retry();
+        mBinding.swipeRefreshHome.setRefreshing(false);
     }
 }

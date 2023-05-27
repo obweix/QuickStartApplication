@@ -68,7 +68,6 @@ public class DatasPagingSource extends RxPagingSource<Integer, Datas> {
     @NonNull
     @Override
     public Single<LoadResult<Integer, Datas>> loadSingle(@NonNull LoadParams<Integer> loadParams) {
-        Log.d(TAG, "loadSingle: ");
 
         // If page number is already there then init page variable with it otherwise we are loading fist page
         int page = loadParams.getKey() != null ? loadParams.getKey() : 0;

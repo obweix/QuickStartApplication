@@ -31,4 +31,10 @@
         android:label="@string/mine"
         tools:layout="@layout/fragment_mine" />
 
+    <fragment
+        android:id="@+id/navgation_home_details"
+        android:name="com.example.quickstartapplication.ui.home.HomeDetailsFragment"
+        android:label="@string/home_detail"
+        tools:layout="@layout/fragment_home_details"/>
+
 </navigation>

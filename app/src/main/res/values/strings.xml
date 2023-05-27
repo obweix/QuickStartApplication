@@ -4,6 +4,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="home">Home</string>
+    <string name="home_detail">Details</string>
     <string name="knowledge">Knowledge</string>
     <string name="navigate">Navigate</string>
     <string name="mine">Mine</string>

@@ -27,11 +27,6 @@ import java.util.Random;
 public class DatasAdapter extends PagingDataAdapter<Datas, DatasAdapter.DatasViewHolder> {
     private static final String TAG = DatasAdapter.class.getSimpleName();
 
-    // Define Loading ViewType
-    public static final int LOADING_ITEM = 0;
-    // Define Movie ViewType
-    public static final int DATAS_ITEM = 1;
-
     private OnItemClickListener mClickListener;
     private OnItemLongClickListener mLongClickListener;
 
@@ -83,12 +78,6 @@ public class DatasAdapter extends PagingDataAdapter<Datas, DatasAdapter.DatasVie
                 String title = binding.getData().getTitle();
             }
         }
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        // set ViewType
-        return position == getItemCount() ? DATAS_ITEM : LOADING_ITEM;
     }
 
 
