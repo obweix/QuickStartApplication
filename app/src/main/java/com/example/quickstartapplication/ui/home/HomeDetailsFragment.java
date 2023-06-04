@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -29,6 +30,13 @@ public class HomeDetailsFragment extends Fragment {
         mBinding.webview.loadUrl(url);
         mBinding.tvHomeDetailsTitle.setText(title);
         mBinding.pbLoading.setMax(100);
+        mBinding.webview.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                view.loadUrl(url);
+                return super.shouldOverrideUrlLoading(view, request);
+            }
+        });
 
         mBinding.webview.setWebChromeClient(new WebChromeClient(){
             @Override

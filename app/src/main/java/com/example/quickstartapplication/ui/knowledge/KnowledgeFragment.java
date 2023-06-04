@@ -23,6 +23,7 @@ import com.example.quickstartapplication.ui.base.BaseFragment;
 import java.util.List;
 
 public class KnowledgeFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
+    private static final String TAG = KnowledgeFragment.class.getSimpleName();
     public static final String LINK_KEY = "link_key";
     public static final String TITLE_KEY = "title_key";
 
@@ -34,6 +35,7 @@ public class KnowledgeFragment extends BaseFragment implements SwipeRefreshLayou
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView: ---------------------");
         mKnowledgeViewModel = new ViewModelProvider(this).get(KnowledgeViewModel.class);
         mNavigateDataAdapter = new NavigateDataAdapter(articles -> {
                Bundle bundle = new Bundle();
@@ -52,7 +54,8 @@ public class KnowledgeFragment extends BaseFragment implements SwipeRefreshLayou
         mFragmentKnowledgeBinding.swipeRefreshLayout.setOnRefreshListener(this);
 
         if(mKnowledgeViewModel.getFilteredArticles().getValue() == null){
-          requestArticles();
+            Log.d(TAG, "onCreateView: requestArticles");
+            requestArticles();
         }
 
 
@@ -64,6 +67,7 @@ public class KnowledgeFragment extends BaseFragment implements SwipeRefreshLayou
                     mFragmentKnowledgeBinding.tvLoadState.setVisibility(View.VISIBLE);
                     return;
                 }
+                Log.d(TAG, "onChanged: ==----------------");
                 mNavigateDataAdapter.submitList(filteredArticles);
                 mFragmentKnowledgeBinding.tvLoadState.setVisibility(View.GONE);
                 mFragmentKnowledgeBinding.swipeRefreshLayout.setRefreshing(false);
@@ -79,6 +83,7 @@ public class KnowledgeFragment extends BaseFragment implements SwipeRefreshLayou
     public void onDestroy() {
         super.onDestroy();
         mKnowledgeViewModel.clearRequest();
+        mKnowledgeViewModel.getFilteredArticles().removeObservers(this);
     }
 
     private void requestArticles(){
@@ -89,6 +94,6 @@ public class KnowledgeFragment extends BaseFragment implements SwipeRefreshLayou
 
     @Override
     public void onRefresh() {
-        requestArticles();
+        mKnowledgeViewModel.requestArticles();
     }
 }

@@ -23,8 +23,6 @@ import com.example.quickstartapplication.R;
 import com.example.quickstartapplication.databinding.ItemArticlesBinding;
 import com.example.quickstartapplication.network.bean.Articles;
 import com.example.quickstartapplication.network.bean.FilteredArticles;
-import com.example.quickstartapplication.ui.home.DatasAdapter;
-import com.example.quickstartapplication.utils.LogUtil;
 import com.example.quickstartapplication.utils.Utils;
 import com.google.android.flexbox.FlexboxLayout;
 
@@ -32,7 +30,7 @@ import java.util.List;
 
 public class NavigateDataAdapter extends ListAdapter<FilteredArticles, NavigateDataAdapter.NavigateDataViewHolder>{
     private static final String TAG = NavigateDataAdapter.class.getSimpleName();
-    private ItemClickListener mItemClickListener;
+    private final ItemClickListener mItemClickListener;
 
     protected NavigateDataAdapter(ItemClickListener itemClickListener) {
         super(new DiffUtil.ItemCallback<FilteredArticles>() {
@@ -70,6 +68,7 @@ public class NavigateDataAdapter extends ListAdapter<FilteredArticles, NavigateD
             TextView textView = new TextView(holder.itemView.getContext());
             textView.setText(articlesList.get(i).getTitle());
             textView.setId(i);
+            textView.setTextSize(14);
             textView.setBackgroundResource(R.drawable.bg_item);
             FlexboxLayout.LayoutParams layoutParams = new FlexboxLayout.LayoutParams(
                     ViewGroup.LayoutParams.WRAP_CONTENT,
