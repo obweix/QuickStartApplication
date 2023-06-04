@@ -1,28 +1,20 @@
 package com.example.quickstartapplication.ui.home;
 
-import android.graphics.Color;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
 import androidx.paging.PagingDataAdapter;
 import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quickstartapplication.R;
-import com.example.quickstartapplication.base.BaseRecyclerViewAdapter;
 import com.example.quickstartapplication.databinding.ItemHomeListBinding;
-import com.example.quickstartapplication.network.bean.Data;
 import com.example.quickstartapplication.network.bean.Datas;
-import com.example.quickstartapplication.utils.Utils;
 
-import java.util.Random;
 
 public class DatasAdapter extends PagingDataAdapter<Datas, DatasAdapter.DatasViewHolder> {
     private static final String TAG = DatasAdapter.class.getSimpleName();

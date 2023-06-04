@@ -40,8 +40,6 @@ public class RetrofitClient {
                     .build();
         }
 
-        Handler handler;
-
         return mRetrofit;
     }
 

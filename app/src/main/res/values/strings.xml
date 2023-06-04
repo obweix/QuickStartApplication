@@ -10,4 +10,7 @@
     <string name="mine">Mine</string>
     <string name="search">Search</string>
     <string name="project">Project</string>
+    <string name="retry">Retry</string>
+    <string name="loading">loading</string>
+    <string name="error">error</string>
 </resources>

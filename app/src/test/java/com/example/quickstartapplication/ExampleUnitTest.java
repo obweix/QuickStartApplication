@@ -7,7 +7,9 @@ import static org.junit.Assert.*;
 import android.annotation.SuppressLint;
 
 import com.example.quickstartapplication.model.HomeModel;
+import com.example.quickstartapplication.model.KnowledgeModel;
 import com.example.quickstartapplication.network.bean.JsonRootBean;
+import com.example.quickstartapplication.network.bean.NavigateJsonRootBean;
 
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Consumer;
@@ -40,5 +42,18 @@ public class ExampleUnitTest {
 
         while (true){}
 
+    }
+
+    @SuppressLint("CheckResult")
+    @Test
+    public void getNav(){
+        KnowledgeModel knowledgeModel = new KnowledgeModel();
+        knowledgeModel.getNavigateData().subscribe(new Consumer<NavigateJsonRootBean>() {
+            @Override
+            public void accept(NavigateJsonRootBean navigateJsonRootBean) throws Throwable {
+                System.out.println(navigateJsonRootBean.toString());
+            }
+        });
+        while (true){}
     }
 }

@@ -13,4 +13,11 @@ public class LogUtil {
        }
    }
 
+    public static void log(String tag,String msg){
+        if(BuildConfig.DEBUG) {
+            Log.d(TAG, "tag = " + tag +" | msg = " +  msg);
+        }
+    }
+
+
 }

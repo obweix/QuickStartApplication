@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_bar_height"
+        android:background="@color/grey_2"
+        android:fitsSystemWindows="true"
+        android:gravity="center"
+        android:text="@string/home"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+</merge>

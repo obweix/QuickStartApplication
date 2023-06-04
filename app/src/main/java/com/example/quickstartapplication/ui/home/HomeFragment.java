@@ -67,10 +67,10 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         mDatasAdapter.addLoadStateListener(loadStates -> {
           if(loadStates.getRefresh() instanceof LoadState.Loading){
              mBinding.tvState.setVisibility(View.VISIBLE);
-             mBinding.tvState.setText("loading");
+             mBinding.tvState.setText(R.string.loading);
           }else if(loadStates.getRefresh() instanceof  LoadState.Error){
              mBinding.tvState.setVisibility(View.VISIBLE);
-             mBinding.tvState.setText("network error");
+             mBinding.tvState.setText(R.string.error);
           }else {
               mBinding.tvState.setVisibility(View.GONE);
           }
