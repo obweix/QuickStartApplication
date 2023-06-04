@@ -25,6 +25,7 @@ import com.example.quickstartapplication.databinding.FragmentHomeBinding;
 import com.example.quickstartapplication.model.HomeModel;
 import com.example.quickstartapplication.network.bean.Datas;
 import com.example.quickstartapplication.network.bean.JsonRootBean;
+import com.example.quickstartapplication.ui.base.BaseFragment;
 import com.example.quickstartapplication.utils.LogUtil;
 
 import java.util.List;
@@ -33,7 +34,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Consumer;
 
-public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = HomeFragment.class.getSimpleName();
     public static final String LINK_KEY = "link_key";
     public static final String TITLE_KEY = "title_key";
@@ -60,8 +61,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             Bundle bundle = new Bundle();
             bundle.putString(LINK_KEY, data.getLink());
             bundle.putString(TITLE_KEY,data.getTitle());
-            Navigation.findNavController(getView()).navigate(R.id.navgation_home_details,bundle);
-
+            navigate(getView(),R.id.navigation_home,R.id.navgation_home_details,bundle);
         });
 
         mDatasAdapter.addLoadStateListener(loadStates -> {

@@ -23,6 +23,7 @@ import com.example.quickstartapplication.R;
 import com.example.quickstartapplication.databinding.ItemArticlesBinding;
 import com.example.quickstartapplication.network.bean.Articles;
 import com.example.quickstartapplication.network.bean.FilteredArticles;
+import com.example.quickstartapplication.ui.home.DatasAdapter;
 import com.example.quickstartapplication.utils.LogUtil;
 import com.example.quickstartapplication.utils.Utils;
 import com.google.android.flexbox.FlexboxLayout;
@@ -31,8 +32,9 @@ import java.util.List;
 
 public class NavigateDataAdapter extends ListAdapter<FilteredArticles, NavigateDataAdapter.NavigateDataViewHolder>{
     private static final String TAG = NavigateDataAdapter.class.getSimpleName();
+    private ItemClickListener mItemClickListener;
 
-    protected NavigateDataAdapter() {
+    protected NavigateDataAdapter(ItemClickListener itemClickListener) {
         super(new DiffUtil.ItemCallback<FilteredArticles>() {
             @Override
             public boolean areItemsTheSame(@NonNull FilteredArticles oldItem, @NonNull FilteredArticles newItem) {
@@ -44,6 +46,8 @@ public class NavigateDataAdapter extends ListAdapter<FilteredArticles, NavigateD
                 return false;
             }
         });
+
+        mItemClickListener = itemClickListener;
 
     }
 
@@ -75,10 +79,8 @@ public class NavigateDataAdapter extends ListAdapter<FilteredArticles, NavigateD
             textView.setLayoutParams(layoutParams);
             textView.setOnClickListener(v -> {
                 Articles articles = articlesList.get(v.getId());
-                Bundle bundle = new Bundle();
-                bundle.putString(LINK_KEY, articles.getLink());
-                bundle.putString(TITLE_KEY,articles.getTitle());
-                Navigation.findNavController(v).navigate(R.id.navgation_home_details,bundle);
+
+                mItemClickListener.onClick(articles);
             } );
 
             holder.binding.flexContainer.addView(textView);
@@ -86,6 +88,9 @@ public class NavigateDataAdapter extends ListAdapter<FilteredArticles, NavigateD
         }
     }
 
+    interface ItemClickListener{
+        void onClick(Articles article);
+    }
 
 
     static class NavigateDataViewHolder extends RecyclerView.ViewHolder {

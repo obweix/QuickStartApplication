@@ -18,10 +18,11 @@ import com.example.quickstartapplication.R;
 import com.example.quickstartapplication.databinding.FragmentKnowledgeBinding;
 import com.example.quickstartapplication.databinding.LayoutAppBarBinding;
 import com.example.quickstartapplication.network.bean.FilteredArticles;
+import com.example.quickstartapplication.ui.base.BaseFragment;
 
 import java.util.List;
 
-public class KnowledgeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class KnowledgeFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
     public static final String LINK_KEY = "link_key";
     public static final String TITLE_KEY = "title_key";
 
@@ -34,7 +35,12 @@ public class KnowledgeFragment extends Fragment implements SwipeRefreshLayout.On
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mKnowledgeViewModel = new ViewModelProvider(this).get(KnowledgeViewModel.class);
-        mNavigateDataAdapter = new NavigateDataAdapter();
+        mNavigateDataAdapter = new NavigateDataAdapter(articles -> {
+               Bundle bundle = new Bundle();
+                bundle.putString(LINK_KEY, articles.getLink());
+                bundle.putString(TITLE_KEY,articles.getTitle());
+                navigate(getView(),R.id.navigation_knowledge,R.id.navgation_home_details,bundle);
+        });
 
         mFragmentKnowledgeBinding = FragmentKnowledgeBinding.inflate(inflater,container,false);
 
