@@ -37,4 +37,11 @@
         android:label="@string/home_detail"
         tools:layout="@layout/fragment_home_details"/>
 
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="com.example.quickstartapplication.ui.login.LoginFragment"
+        android:label="loginPage"
+        tools:layout="@layout/fragment_login"
+        />
+
 </navigation>

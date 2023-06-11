@@ -35,7 +35,6 @@ public class KnowledgeFragment extends BaseFragment implements SwipeRefreshLayou
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView: ---------------------");
         mKnowledgeViewModel = new ViewModelProvider(this).get(KnowledgeViewModel.class);
         mNavigateDataAdapter = new NavigateDataAdapter(articles -> {
                Bundle bundle = new Bundle();

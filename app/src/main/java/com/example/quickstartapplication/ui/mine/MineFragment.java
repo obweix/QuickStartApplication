@@ -10,10 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.quickstartapplication.R;
 import com.example.quickstartapplication.databinding.FragmentMineBinding;
+import com.example.quickstartapplication.ui.base.BaseFragment;
 
 
-public class MineFragment extends Fragment {
+public class MineFragment extends BaseFragment {
 
     private FragmentMineBinding binding;
 
@@ -24,9 +26,9 @@ public class MineFragment extends Fragment {
 
         binding = FragmentMineBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-        final TextView textView = binding.textDashboard;
-        mineViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        binding.ivAvatar.setOnClickListener(view -> {
+            navigate(getView(), R.id.navigation_mine,R.id.navigation_login,null);
+        });
         return root;
     }
 
